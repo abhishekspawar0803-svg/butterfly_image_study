@@ -117,9 +117,29 @@ The second part of the project applies transfer learning to the same butterfly s
 
 This helps compare a pretrained feature extractor against the custom CNN baseline.
 
+### Transfer Learning Results
+
+- **Validation Accuracy:** 85.99% (loss: 0.4974)
+- **Macro Average F1-score:** 0.85 (weighted avg: 0.87)
+- **Per-class highlights:**
+  - Perfect classification (F1 = 1.00) on several species (e.g., classes 1, 3, 50, 51, 74)
+  - Hardest classes: class 19 (F1 = 0.59), class 38 (F1 = 0.56), class 57 (F1 = 0.52)
+- **Metrics:** Accuracy curve, loss curve, confusion matrix, and full classification report (per-class precision, recall, F1 across all 75 species).
+
+> Transfer learning achieved **+6.99% higher validation accuracy** than the custom CNN (85.99% vs 78.98%), confirming the advantage of pretrained feature representations on fine-grained species classification.
+
 ## Part 3: Autoencoder Reconstruction
 
-The final part of the notebook uses an autoencoder to reconstruct butterfly images.
+An encoder-decoder convolutional autoencoder was trained on the butterfly dataset for unsupervised representation learning and image reconstruction.
+
+- **Architecture:**
+  - **Encoder:** 4× Conv2D blocks (32→64→128→256 filters, MaxPool2D each), output: 14×14×256 latent space
+  - **Decoder:** 4× Conv2DTranspose blocks (128→64→32→3 filters, stride 2), output: 224×224×3
+  - **Total parameters:** 776,579 (~2.96 MB)
+- **Training:** Adam optimizer, MSE loss, 2000 epochs
+  - Epoch 1: loss 0.0367 → val_loss 0.0148
+  - Epoch 6: loss 0.0070 → val_loss 0.0066 (converging)
+- **Evaluation:** Qualitative reconstruction — reconstructed images are visually compared against originals to assess encoder compression quality.
 
 ### Original Images
 
