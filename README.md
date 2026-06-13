@@ -62,6 +62,43 @@ The first part of the notebook builds a custom convolutional neural network for 
 
 This section demonstrates end-to-end image classification using a model built from scratch.
 
+### Custom CNN Results
+
+The custom CNN was trained on **5200 training images** and validated on **1299 validation images** using an 80/20 split from the 6499 labeled butterfly images.
+
+**Dataset and setup**
+
+- Total labeled training images: **6499**
+- Test images: **2786**
+- Number of classes: **75**
+- Input size: **224 × 224 × 3**
+- Batch size: **32**
+
+**Model summary**
+
+- Architecture: 4 convolution blocks with BatchNorm + ReLU + MaxPooling, followed by GlobalAveragePooling and dense layers
+- Total parameters: **498,699**
+- Trainable parameters: **497,739**
+- Non-trainable parameters: **960**
+
+**Performance**
+
+- Best validation accuracy during training: **79.83%**
+- Best validation loss during training: **0.7880**
+- Validation accuracy after evaluation: **78.98%**
+- Validation loss after evaluation: **0.7961**
+
+**Classification report summary**
+
+- Macro average precision: **0.80**
+- Macro average recall: **0.79**
+- Macro average F1-score: **0.79**
+- Weighted average precision: **0.81**
+- Weighted average recall: **0.79**
+- Weighted average F1-score: **0.79**
+
+These results show that the custom CNN can learn fine-grained butterfly species classification reasonably well, even across **75 visually similar classes**, while staying relatively lightweight at under **0.5 million parameters**.
+
 ## Part 2: Transfer Learning
 
 The second part of the project applies transfer learning to the same butterfly species classification problem.
